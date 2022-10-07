@@ -21,12 +21,13 @@ namespace BulkyBookWeb.Hubs
             return base.OnDisconnectedAsync(exception);
         }
         //invoked everytime page get loaded
-        public async Task NewWindowLoaded()
+        public async Task<string> NewWindowLoaded()
         {
             TotalViews++;
 
             //notify all clients that totalview is updated
             await Clients.All.SendAsync("updateTotalViews", TotalViews);
+            return $"total views -{TotalViews}";
         }
     }
 }
